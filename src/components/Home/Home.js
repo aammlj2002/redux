@@ -24,9 +24,9 @@ function Home() {
         fetchMovie();
     }, []);
     return (
-        <div>
+        <>
             <MovieListing />
-        </div>
+        </>
     );
 }
 
