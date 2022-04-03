@@ -7,14 +7,13 @@ import MovieListing from "../MovieListing/MovieListing";
 function Home() {
     const dispatch = useDispatch();
     const apikey = "dbfc6703";
-    const searchKey = "Harry";
+    const searchKey = "black clover";
     useEffect(() => {
         const fetchMovie = async () => {
             try {
                 const res = await axios.get(
                     `http://www.omdbapi.com/?apikey=${apikey}&s=${searchKey}"`
                 );
-                console.log(res);
                 dispatch(addMovies(res.data));
             } catch (error) {
                 console.log(error);
