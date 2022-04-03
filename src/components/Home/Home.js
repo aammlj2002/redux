@@ -25,7 +25,9 @@ function Home() {
     }, []);
     return (
         <>
-            <MovieListing />
+            <div className="bg-gray-900">
+                <MovieListing />
+            </div>
         </>
     );
 }
