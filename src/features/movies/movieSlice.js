@@ -1,20 +1,24 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import axios from "axios";
 
-export const fetchAsyncMovies = createAsyncThunk(
-    "movies/fetchAsyncMovies",
-    async () => {
-        const res = await axios.get(
-            `http://www.omdbapi.com/?apikey=dbfc6703&s=Harry`
-        );
-        return res.data;
-    }
-);
+export const fetchMovies = createAsyncThunk("movies/fetchMovies", async () => {
+    const res = await axios.get(
+        `http://www.omdbapi.com/?apikey=dbfc6703&s=Harry`
+    );
+    return res.data;
+});
+export const fetchSeries = createAsyncThunk("movies/fetchSeries", async () => {
+    const res = await axios.get(
+        `http://www.omdbapi.com/?apikey=dbfc6703&s=Money&type=series`
+    );
+    return res.data;
+});
 
 const movieSlice = createSlice({
     name: "movies",
     initialState: {
         movies: {},
+        series: {},
     },
     reducers: {
         addMovies: (state, action) => {
@@ -22,14 +26,23 @@ const movieSlice = createSlice({
         },
     },
     extraReducers: {
-        [fetchAsyncMovies.pending]: (state) => {
+        [fetchMovies.pending]: (state) => {
             return { ...state, movies: { Response: "Pending" } };
         },
-        [fetchAsyncMovies.fulfilled]: (state, action) => {
+        [fetchMovies.fulfilled]: (state, action) => {
             return { ...state, movies: action.payload };
         },
-        [fetchAsyncMovies.rejected]: (state) => {
+        [fetchMovies.rejected]: (state) => {
             return { ...state, movies: { Response: "Rejected" } };
+        },
+        [fetchSeries.pending]: (state) => {
+            return { ...state, series: { Response: "Pending" } };
+        },
+        [fetchSeries.fulfilled]: (state, action) => {
+            return { ...state, series: action.payload };
+        },
+        [fetchSeries.rejected]: (state) => {
+            return { ...state, series: { Response: "Rejected" } };
         },
     },
 });
