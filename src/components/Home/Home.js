@@ -1,26 +1,12 @@
-import axios from "axios";
 import React, { useEffect } from "react";
 import { useDispatch } from "react-redux";
-import { addMovies } from "../../features/movies/movieSlice";
+import { fetchAsyncMovies } from "../../features/movies/movieSlice";
 import MovieListing from "../MovieListing/MovieListing";
 
 function Home() {
     const dispatch = useDispatch();
-    const apikey = "dbfc6703";
-    const searchKey = "black clover";
     useEffect(() => {
-        const fetchMovie = async () => {
-            try {
-                const res = await axios.get(
-                    `http://www.omdbapi.com/?apikey=${apikey}&s=${searchKey}"`
-                );
-                dispatch(addMovies(res.data));
-            } catch (error) {
-                console.log(error);
-            }
-        };
-
-        fetchMovie();
+        dispatch(fetchAsyncMovies());
     }, []);
     return (
         <>
