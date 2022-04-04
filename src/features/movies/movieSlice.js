@@ -13,12 +13,22 @@ export const fetchSeries = createAsyncThunk("movies/fetchSeries", async () => {
     );
     return res.data;
 });
+export const fetchDetail = createAsyncThunk(
+    "movies/fetchDetail",
+    async (id) => {
+        const res = await axios.get(
+            `http://www.omdbapi.com/?apikey=dbfc6703&i=${id}`
+        );
+        return res.data;
+    }
+);
 
 const movieSlice = createSlice({
     name: "movies",
     initialState: {
         movies: {},
         series: {},
+        detail: {},
     },
     reducers: {
         addMovies: (state, action) => {
@@ -43,6 +53,15 @@ const movieSlice = createSlice({
         },
         [fetchSeries.rejected]: (state) => {
             return { ...state, series: { Response: "Rejected" } };
+        },
+        [fetchDetail.pending]: (state) => {
+            return { ...state, detail: { Response: "Pending" } };
+        },
+        [fetchDetail.fulfilled]: (state, action) => {
+            return { ...state, detail: action.payload };
+        },
+        [fetchDetail.rejected]: (state) => {
+            return { ...state, detail: { Response: "Rejected" } };
         },
     },
 });
