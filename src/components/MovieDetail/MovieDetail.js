@@ -6,7 +6,6 @@ import DetailList from "../DetailList";
 
 function MovieDetail() {
     const movie = useSelector((state) => state.movies.detail);
-    console.log(movie);
     const dispatch = useDispatch();
     const { imdbID } = useParams();
     useEffect(() => {

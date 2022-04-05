@@ -22,6 +22,26 @@ export const fetchDetail = createAsyncThunk(
         return res.data;
     }
 );
+export const fetchSearchMovie = createAsyncThunk(
+    "movies/fetchSearchMovie",
+    async (search) => {
+        const res = await axios.get(
+            `http://www.omdbapi.com/?apikey=dbfc6703&s=${search}&type=movie`
+        );
+        console.log(res.data);
+        return res.data;
+    }
+);
+export const fetchSearchSeries = createAsyncThunk(
+    "movies/fetchSearchSeries",
+    async (search) => {
+        const res = await axios.get(
+            `http://www.omdbapi.com/?apikey=dbfc6703&s=${search}&type=series`
+        );
+        console.log(res.data);
+        return res.data;
+    }
+);
 
 const movieSlice = createSlice({
     name: "movies",
@@ -62,6 +82,24 @@ const movieSlice = createSlice({
         },
         [fetchDetail.rejected]: (state) => {
             return { ...state, detail: { Response: "Rejected" } };
+        },
+        [fetchSearchMovie.pending]: (state) => {
+            return { ...state, movies: { Response: "Pending" } };
+        },
+        [fetchSearchMovie.fulfilled]: (state, action) => {
+            return { ...state, movies: action.payload };
+        },
+        [fetchSearchMovie.rejected]: (state) => {
+            return { ...state, movies: { Response: "Rejected" } };
+        },
+        [fetchSearchSeries.pending]: (state) => {
+            return { ...state, series: { Response: "Pending" } };
+        },
+        [fetchSearchSeries.fulfilled]: (state, action) => {
+            return { ...state, series: action.payload };
+        },
+        [fetchSearchSeries.rejected]: (state) => {
+            return { ...state, series: { Response: "Rejected" } };
         },
     },
 });

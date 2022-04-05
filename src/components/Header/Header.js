@@ -1,6 +1,20 @@
-import React from "react";
+import React, { useState } from "react";
+import { useDispatch } from "react-redux";
+import {
+    fetchSearchMovie,
+    fetchSearchSeries,
+} from "../../features/movies/movieSlice";
 
 function Header() {
+    const dispatch = useDispatch();
+    const [search, setSearch] = useState("");
+    const handleSearch = (e) => {
+        e.preventDefault();
+        if (search) {
+            dispatch(fetchSearchMovie(search));
+            dispatch(fetchSearchSeries(search));
+        }
+    };
     return (
         <>
             <div>
@@ -41,9 +55,9 @@ function Header() {
                                     <svg
                                         fill="none"
                                         className="relative w-5 h-5"
-                                        stroke-linecap="round"
-                                        stroke-linejoin="round"
-                                        stroke-width="2"
+                                        strokeLinecap="round"
+                                        strokeLinejoin="round"
+                                        strokeWidth="2"
                                         stroke="currentColor"
                                         viewBox="0 0 24 24"
                                     >
@@ -57,11 +71,17 @@ function Header() {
                                 >
                                     <path d="M12.9 14.32a8 8 0 1 1 1.41-1.41l5.35 5.33-1.42 1.42-5.33-5.34zM8 14A6 6 0 1 0 8 2a6 6 0 0 0 0 12z"></path>
                                 </svg>
-                                <input
-                                    type="text"
-                                    className="block  w-full py-1.5 pl-10 pr-4 leading-normal rounded-2xl focus:border-transparent focus:outline-none focus:ring-2 focus:ring-blue-500 ring-opacity-90  bg-gray-600 text-gray-400 aa-input"
-                                    placeholder="Search"
-                                />
+                                <form onSubmit={handleSearch}>
+                                    <input
+                                        type="text"
+                                        className="block  w-full py-1.5 pl-10 pr-4 leading-normal rounded-2xl focus:border-transparent focus:outline-none focus:ring-2 focus:ring-blue-500 ring-opacity-90  bg-gray-600 text-gray-400 aa-input"
+                                        placeholder="Search"
+                                        value={search}
+                                        onChange={(e) =>
+                                            setSearch(e.target.value)
+                                        }
+                                    />
+                                </form>
                             </div>
                         </div>
                     </div>
