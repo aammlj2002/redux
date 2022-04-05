@@ -1,18 +1,22 @@
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
+import { useNavigate } from "react-router-dom";
 import {
     fetchSearchMovie,
     fetchSearchSeries,
 } from "../../features/movies/movieSlice";
 
-function Header() {
+function Header(props) {
+    const Navigate = useNavigate();
     const dispatch = useDispatch();
     const [search, setSearch] = useState("");
     const handleSearch = (e) => {
         e.preventDefault();
+
         if (search) {
             dispatch(fetchSearchMovie(search));
             dispatch(fetchSearchSeries(search));
+            Navigate("/");
         }
     };
     return (

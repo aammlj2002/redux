@@ -7,15 +7,15 @@ import Footer from "./components/Footer/Footer";
 function App() {
     return (
         <>
-            <Header />
             <Router>
+                <Header />
                 <Routes>
                     <Route path="/" element={<Home />} />
                     <Route path="/movies/:imdbID" element={<MovieDetail />} />
                     <Route element={<PageNotFound />} />
                 </Routes>
+                <Footer />
             </Router>
-            <Footer />
         </>
     );
 }

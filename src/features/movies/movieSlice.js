@@ -28,7 +28,6 @@ export const fetchSearchMovie = createAsyncThunk(
         const res = await axios.get(
             `http://www.omdbapi.com/?apikey=dbfc6703&s=${search}&type=movie`
         );
-        console.log(res.data);
         return res.data;
     }
 );
@@ -38,7 +37,6 @@ export const fetchSearchSeries = createAsyncThunk(
         const res = await axios.get(
             `http://www.omdbapi.com/?apikey=dbfc6703&s=${search}&type=series`
         );
-        console.log(res.data);
         return res.data;
     }
 );

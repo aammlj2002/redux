@@ -1,13 +1,17 @@
 import React, { useEffect } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { fetchMovies, fetchSeries } from "../../features/movies/movieSlice";
 import MovieListing from "../MovieListing/MovieListing";
 
 function Home() {
     const dispatch = useDispatch();
+    const movies = useSelector((state) => state.movies.movies);
+    const series = useSelector((state) => state.movies.series);
     useEffect(() => {
-        dispatch(fetchMovies());
-        dispatch(fetchSeries());
+        if (!Object.keys(movies).length && !Object.keys(series).length) {
+            dispatch(fetchMovies());
+            dispatch(fetchSeries());
+        }
     }, [dispatch]);
     return (
         <>

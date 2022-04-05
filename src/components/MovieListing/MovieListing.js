@@ -16,7 +16,7 @@ function MovieListing() {
                                 <MovieCard key={movie.imdbID} movie={movie} />
                             ))
                         ) : movies.Response === "False" ? (
-                            <div>No Result Found</div>
+                            <div className="text-white">No Result Found</div>
                         ) : movies.Response === "Pending" ? (
                             <div className="text-white">loading...</div>
                         ) : movies.Response === "Rejected" ? (
@@ -38,7 +38,7 @@ function MovieListing() {
                                 <MovieCard key={movie.imdbID} movie={movie} />
                             ))
                         ) : series.Response === "False" ? (
-                            <div>No Result Found</div>
+                            <div className="text-white">No Result Found</div>
                         ) : series.Response === "Pending" ? (
                             <div className="text-white">loading...</div>
                         ) : series.Response === "Rejected" ? (
